@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 
 
 const App = () => {
-  const {register, handleSubmit,reset} = useForm();
+  const {register, handleSubmit,reset, formState:{errors}} = useForm();
   const handleFormSubmit = (data)=> {
     console.log(data);
     reset();
@@ -19,9 +19,11 @@ const App = () => {
           width: "40%",
           gap: "15px",
         }}>
-        <input {...register("name")}type="text" placeholder='Name' />
-        <input {...register("Email")}type="text" placeholder='Email' />
-        <input {...register("password")}type="text" placeholder='Password' />
+        <input {...register("name",{required: true})}type="text" placeholder='Name' />{errors.name && errors.name.type === "required" ? (<p>Name is required</p>): null}
+        <input {...register("Email",{required: true})}type="text" placeholder='Email' />
+        {errors.email && errors.email.type === "required"? (<p>Email is required</p>): null }
+        <input {...register("password", {required: true, minLength:6})}type="text" placeholder='Password' />
+        {errors.password && errors.password.type === "required" ? (<p>at least 6 characters required</p>): null}
         <input type="submit" value="Create" />
       </form>
     </div>
