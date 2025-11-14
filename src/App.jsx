@@ -23,6 +23,9 @@ const App = () => {
         <input {...register("Email",{required: true})}type="text" placeholder='Email' />
         {errors.email && errors.email.type === "required"? (<p>Email is required</p>): null }
         <input {...register("password", {required: true, minLength:6})}type="text" placeholder='Password' />
+         {errors.password && errors.password.type === "required" ? (
+          <p>Password is required</p>
+        ) : null}
         {errors.password && errors.password.type === "required" ? (<p>at least 6 characters required</p>): null}
         <input type="submit" value="Create" />
       </form>
